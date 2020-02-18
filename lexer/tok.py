@@ -24,7 +24,7 @@ FUNCTION = 'FUNCTION'
 LET      = 'LET'
 
 class Tok():
-    def __init__(self, tok_type, literal):
+    def __init__(self, tok_type=None, literal=None):
         self.tok_type = tok_type
         self.literal = literal
 

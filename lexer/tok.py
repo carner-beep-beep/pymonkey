@@ -9,6 +9,16 @@ INT     = 'INT'
 # Operators
 ASSIGN  = '='
 PLUS    = '+'
+MINUS   = '-'
+BANG    = '!'
+SLASH   = '/'
+ASTERISK = '*'
+
+GT      = '>'
+LT      = '<'
+
+EQ      = '=='
+NOT_EQ  = '!='
 
 # Delimiters
 COMMA   = ','
@@ -22,8 +32,14 @@ RBRACE  = '}'
 # Keywords
 FUNCTION = 'FUNCTION'
 LET      = 'LET'
+TRUE     = 'TRUE'
+FALSE    = 'FALSE'
+IF       = 'IF'
+ELSE     = 'ELSE'
+RETURN   = 'RETURN'
 
-keywords = {'let': LET, 'fn': FUNCTION}
+keywords = {'let': LET, 'fn': FUNCTION, 'true': TRUE, 'false': FALSE, 'if': IF,
+        'else': ELSE, 'return': RETURN}
 
 class Tok():
     def __init__(self, tok_type=None, literal=None):

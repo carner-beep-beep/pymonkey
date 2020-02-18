@@ -13,8 +13,14 @@ class Lexer():
         self.skip_whitespace()
 
         if self.char == '=':
-            t.tok_type = tok.ASSIGN
-            t.literal = self.char
+            if self.peek() == '=':
+                char = self.char
+                self.next_char()
+                t.literal = char + self.char
+                t.tok_type = tok.EQ
+            else:
+                t.tok_type = tok.ASSIGN
+                t.literal = self.char
         elif self.char == '+':
             t.tok_type = tok.PLUS
             t.literal = self.char
@@ -35,6 +41,30 @@ class Lexer():
             t.literal = self.char
         elif self.char == '}':
             t.tok_type = tok.RBRACE
+            t.literal = self.char
+        elif self.char == '!':
+            if self.peek() == '=':
+                char = self.char
+                self.next_char()
+                t.literal = char + self.char
+                t.tok_type = tok.NOT_EQ
+            else:
+                t.tok_type = tok.BANG
+                t.literal = self.char
+        elif self.char == '-':
+            t.tok_type = tok.MINUS
+            t.literal = self.char
+        elif self.char == '/':
+            t.tok_type = tok.SLASH
+            t.literal = self.char
+        elif self.char == '*':
+            t.tok_type = tok.ASTERISK
+            t.literal = self.char
+        elif self.char == '>':
+            t.tok_type = tok.GT
+            t.literal = self.char
+        elif self.char == '<':
+            t.tok_type = tok.LT
             t.literal = self.char
         elif self.char == 0:
             t.tok_type = tok.EOF
@@ -84,3 +114,10 @@ class Lexer():
             return
         while self.char.isspace():
             self.next_char()
+
+    def peek(self):
+        if self.next_position >= len(self.source):
+            return 0
+        else:
+            return self.source[self.next_position]
+

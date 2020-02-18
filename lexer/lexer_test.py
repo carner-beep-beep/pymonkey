@@ -10,7 +10,18 @@ def test_tokens():
         x + y;
     };
 
-    let result = add(five, ten);'''
+    let result = add(five, ten);
+    !-/*5;
+    5 < 10 > 5;
+
+    if (5 < 10) {
+        return true;
+    } else {
+        return false;
+    }
+
+    10 == 10;
+    10 != 9;'''
 
     expected_tokens = [
             Tok(tok.LET, 'let'),
@@ -48,6 +59,43 @@ def test_tokens():
             Tok(tok.COMMA, ','),
             Tok(tok.IDENT, 'ten'),
             Tok(tok.RPAREN, ')'),
+            Tok(tok.SEMICOLON, ';'),
+            Tok(tok.BANG, '!'),
+            Tok(tok.MINUS, '-'),
+            Tok(tok.SLASH, '/'),
+            Tok(tok.ASTERISK, '*'),
+            Tok(tok.INT, '5'),
+            Tok(tok.SEMICOLON, ';'),
+            Tok(tok.INT, '5'),
+            Tok(tok.LT, '<'),
+            Tok(tok.INT, '10'),
+            Tok(tok.GT, '>'),
+            Tok(tok.INT, '5'),
+            Tok(tok.SEMICOLON, ';'),
+            Tok(tok.IF, 'if'),
+            Tok(tok.LPAREN, '('),
+            Tok(tok.INT, '5'),
+            Tok(tok.LT, '<'),
+            Tok(tok.INT, '10'),
+            Tok(tok.RPAREN, ')'),
+            Tok(tok.LBRACE, '{'),
+            Tok(tok.RETURN, 'return'),
+            Tok(tok.TRUE, 'true'),
+            Tok(tok.SEMICOLON, ';'),
+            Tok(tok.RBRACE, '}'),
+            Tok(tok.ELSE, 'else'),
+            Tok(tok.LBRACE, '{'),
+            Tok(tok.RETURN, 'return'),
+            Tok(tok.FALSE, 'false'),
+            Tok(tok.SEMICOLON, ';'),
+            Tok(tok.RBRACE, '}'),
+            Tok(tok.INT, '10'),
+            Tok(tok.EQ, '=='),
+            Tok(tok.INT, '10'),
+            Tok(tok.SEMICOLON, ';'),
+            Tok(tok.INT, '10'),
+            Tok(tok.NOT_EQ, '!='),
+            Tok(tok.INT, '9'),
             Tok(tok.SEMICOLON, ';'),
             Tok(tok.EOF, '')
     ]

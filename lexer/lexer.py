@@ -9,6 +9,8 @@ class Lexer():
 
     def next_token(self):
         t = tok.Tok()
+        
+        self.skip_whitespace()
 
         if self.char == '=':
             t.tok_type = tok.ASSIGN
@@ -34,6 +36,23 @@ class Lexer():
         elif self.char == '}':
             t.tok_type = tok.RBRACE
             t.literal = self.char
+        elif self.char == 0:
+            t.tok_type = tok.EOF
+            t.literal = ''
+        else:
+            if self.char.isalpha():
+                print('In read identifier')
+                t.literal = self.read_identifier()
+                t.tok_type = tok.lookup_keyword(t.literal)
+                return t  # return here so we don't update position
+            elif self.char.isdigit():
+                print('In read number')
+                t.tok_type = tok.INT
+                t.literal = self.read_number()
+                return t
+            else:
+                tok.tok_type = tok.ILLEGAL
+                tok.literal = self.char
 
         self.next_char()
 
@@ -45,4 +64,23 @@ class Lexer():
             self.char = 0   # EOF
         else:
             self.char = self.source[self.position]
+            print(f'self.char: {self.char} is type {type(self.char)}')
             self.next_position = self.position + 1
+
+    def read_identifier(self):
+        start_position = self.position
+        while self.char.isalpha():
+            self.next_char()
+        return self.source[start_position:self.position]
+
+    def read_number(self):
+        start_position = self.position
+        while self.char.isdigit():
+            self.next_char()
+        return self.source[start_position:self.position]
+
+    def skip_whitespace(self):
+        if self.char == 0:
+            return
+        while self.char.isspace():
+            self.next_char()

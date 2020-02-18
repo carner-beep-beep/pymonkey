@@ -23,6 +23,8 @@ RBRACE  = '}'
 FUNCTION = 'FUNCTION'
 LET      = 'LET'
 
+keywords = {'let': LET, 'fn': FUNCTION}
+
 class Tok():
     def __init__(self, tok_type=None, literal=None):
         self.tok_type = tok_type
@@ -30,3 +32,9 @@ class Tok():
 
     def __repr__(self):
         return f'Tok[type: {self.tok_type}, literal: {self.literal}]'
+
+def lookup_keyword(ident):
+    keyword = keywords.get(ident)
+    if keyword:
+        return keyword
+    return IDENT

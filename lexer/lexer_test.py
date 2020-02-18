@@ -1,6 +1,6 @@
-from tok import Tok
-import tok
-from lexer import Lexer
+from .tok import Tok
+from . import tok
+from .lexer import Lexer
 
 def test_tokens():
     program_input = '''let five = 5;

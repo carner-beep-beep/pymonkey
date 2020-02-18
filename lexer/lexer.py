@@ -1,4 +1,4 @@
-import tok
+from . import tok
 
 class Lexer():
     def __init__(self, source):
